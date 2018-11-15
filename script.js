@@ -60,7 +60,7 @@ function moveEverything() {
         
     } else if (ballX - ballRadius < 0) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
-            ballSpeedX = -ballSpeedX
+            ballSpeedX = -ballSpeedX;
         } else {
             ballReset();
         }
