@@ -23,9 +23,9 @@ function calculateMousePosition(evt) {
 
 function computerMovement() {
     var paddle2yCenter = paddle2Y + (PADDLE_HEIGHT / 2);
-    if(paddle2yCenter  < ballY) {
+    if(paddle2yCenter  < ballY - 35) {
         paddle2Y += 6;
-    } else {
+    } else if (paddle2Y > ballY +35) {
         paddle2Y -= 6;
     }
 }
