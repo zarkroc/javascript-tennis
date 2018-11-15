@@ -2,13 +2,14 @@ var canvas;
 var canvasContext;
 var ballX = 50;
 var ballY = 50;
-var ballSpeedX = 5;
-var ballSpeedY = 5;
+var ballSpeedX = 10;
+var ballSpeedY = 4;
 var ballRadius = 10;
 var paddle1Y = 250;
 var paddle2Y = 250;
 const PADDLE_THICKNESS = 10;
 const PADDLE_HEIGHT = 100;
+const WINNING_SCORE = 3;
 
 var player1Score = 0;
 var player2Score = 0;
@@ -50,6 +51,7 @@ function ballReset() {
     ballSpeedX = -ballSpeedX;
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
+    deltaY = 0;
 }
 
 function moveEverything() {
@@ -57,6 +59,8 @@ function moveEverything() {
     if (ballX + ballRadius > canvas.width) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
+            let deltaY = ballY - (paddle1Y + PADDLE_HEIGHT/2);
+            ballSpeedY = deltaY * 0.35;
         } else {
             ballReset();
             player2Score++;
@@ -65,6 +69,8 @@ function moveEverything() {
     } else if (ballX - ballRadius < 0) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
+            let deltaY = ballY - (paddle2Y + PADDLE_HEIGHT/2);
+            ballSpeedY = deltaY * 0.35;
         } else {
             ballReset();
             player1Score++;
