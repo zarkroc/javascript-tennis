@@ -19,16 +19,16 @@ function calculateMousePosition(evt) {
     var mouseX = evt.clientX - rect.left - root.scrollLeft;
     var mouseY = evt.clientY - rect.top - root.scrollTop;
     return {
-        x:mouseX,
-        y:mouseY
+        x: mouseX,
+        y: mouseY
     };
 }
 
 function computerMovement() {
     var paddle2yCenter = paddle2Y + (PADDLE_HEIGHT / 2);
-    if(paddle2yCenter  < ballY - 35) {
+    if (paddle2yCenter < ballY - 35) {
         paddle2Y += 6;
-    } else if (paddle2Y > ballY +35) {
+    } else if (paddle2Y > ballY + 35) {
         paddle2Y -= 6;
     }
 }
@@ -40,9 +40,9 @@ window.onload = function () {
         moveEverything();
         drawEverything();
     }, 1000 / framesPerSecond);
-    canvas.addEventListener('mousemove', function(evt) {
+    canvas.addEventListener('mousemove', function (evt) {
         var mousePos = calculateMousePosition(evt);
-        paddle1Y = mousePos.y -(PADDLE_HEIGHT/2);
+        paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
     });
 }
 
@@ -54,14 +54,14 @@ function ballReset() {
 
 function moveEverything() {
     computerMovement();
-    if (ballX + ballRadius > canvas.width)  {
+    if (ballX + ballRadius > canvas.width) {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
         } else {
             ballReset();
             player2Score++;
         }
-        
+
     } else if (ballX - ballRadius < 0) {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
@@ -71,7 +71,7 @@ function moveEverything() {
         }
     }
 
-    if (ballY + ballRadius > canvas.height || ballY -ballRadius < 0) {
+    if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
         ballSpeedY = -ballSpeedY;
     }
     ballX += ballSpeedX;
@@ -96,7 +96,7 @@ function drawEverything() {
     //left player paddle
     colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
     //right player paddle
-    colorRect(canvas.width - PADDLE_THICKNESS , paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+    colorRect(canvas.width - PADDLE_THICKNESS, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
     //draw the ball
     colorCircle(ballX, ballY, ballRadius, 'white');
 
