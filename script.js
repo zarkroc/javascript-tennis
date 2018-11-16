@@ -10,6 +10,7 @@ var paddle2Y = 250;
 const PADDLE_THICKNESS = 10;
 const PADDLE_HEIGHT = 100;
 const WINNING_SCORE = 3;
+const INITIAL_SPEED_Y = 4;
 
 var showWinScreen = false;
 
@@ -29,10 +30,10 @@ function calculateMousePosition(evt) {
 
 function computerMovement() {
     var paddle2yCenter = paddle2Y + (PADDLE_HEIGHT / 2);
-    if (paddle2yCenter < ballY - 35) {
-        paddle2Y += 6;
-    } else if (paddle2Y > ballY + 35) {
-        paddle2Y -= 6;
+    if (paddle2yCenter < ballY - 25) {
+        paddle2Y += 10;
+    } else if (paddle2Y > ballY + 25) {
+        paddle2Y -= 10;
     }
 }
 
@@ -66,7 +67,7 @@ function ballReset() {
     ballSpeedX = -ballSpeedX;
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
-    deltaY = 0;
+    ballSpeedY = INITIAL_SPEED_Y;
 }
 
 function moveEverything() {
@@ -78,9 +79,9 @@ function moveEverything() {
         if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
             let deltaY = ballY - (paddle1Y + PADDLE_HEIGHT/2);
-            ballSpeedY = deltaY * 0.35;
+            ballSpeedY = deltaY * 0.15;
         } else {
-            player2Score++;
+            player1Score++;
             ballReset();
         }
 
@@ -88,9 +89,9 @@ function moveEverything() {
         if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
             let deltaY = ballY - (paddle2Y + PADDLE_HEIGHT/2);
-            ballSpeedY = deltaY * 0.35;
+            ballSpeedY = deltaY * 0.15;
         } else {
-            player1Score++;
+            player2Score++;
             ballReset();
         }
     }
@@ -123,6 +124,11 @@ function drawNet() {
 function drawEverything() {
     // Make all black
     colorRect(0, 0, canvas.width, canvas.height, 'black');
+    canvasContext.fillStyle = 'white';
+    canvasContext.fillText("Player1", 90, 20);
+    canvasContext.fillText("Computer", canvas.width - 90, 20);
+    canvasContext.fillText(player1Score, 90, 40);
+    canvasContext.fillText(player2Score, canvas.width - 90, 40);
     if (showWinScreen) {
         canvasContext.fillStyle = 'white';
         if (player1Score >= WINNING_SCORE) {
@@ -142,6 +148,5 @@ function drawEverything() {
     //draw the ball
     colorCircle(ballX, ballY, ballRadius, 'white');
 
-    canvasContext.fillText(player1Score, 100, 100);
-    canvasContext.fillText(player2Score, canvas.width - 100, 100);
+    
 }

@@ -1,0 +1,13 @@
+* {
+    margin: 0
+}
+body {
+    margin: 0;
+    text-align: center;
+    background-color: darkslategray
+}
+
+h1 {
+    margin: 1em 0;
+    color: white;
+}
