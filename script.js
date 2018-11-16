@@ -114,6 +114,12 @@ function colorCircle(centerX, centerY, radius, color) {
     canvasContext.fill();
 }
 
+function drawNet() {
+    for (let i = 0; i < canvas.height; i+=40) {
+        colorRect(canvas.width/2-1, i, 2, 20, 'white')
+    }
+}
+
 function drawEverything() {
     // Make all black
     colorRect(0, 0, canvas.width, canvas.height, 'black');
@@ -128,6 +134,7 @@ function drawEverything() {
         return;    
     }
 
+    drawNet();
     //left player paddle
     colorRect(0, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
     //right player paddle
